@@ -33,15 +33,21 @@ class DPlayer {
      * @constructor
      */
     constructor (options) {
+        // 合并options和defaultOptions
         this.options = handleOption(options);
 
+        // 视频质量切换 例如 360P，380P
         if (this.options.video.quality) {
             this.qualityIndex = this.options.video.defaultQuality;
             this.quality = this.options.video.quality[this.options.video.defaultQuality];
         }
+        // i18n
         this.tran = new i18n(this.options.lang).tran;
+        // 初始化事件类
         this.events = new Events();
+        // 初始化用户设置
         this.user = new User(this);
+        // 初始化dom节点
         this.container = this.options.container;
 
         this.container.classList.add('dplayer');
@@ -59,6 +65,7 @@ class DPlayer {
             this.container.classList.add('dplayer-arrow');
         }
 
+        // render dom, 会挂载很多东西到this.template
         this.template = new Template({
             container: this.container,
             options: this.options,
@@ -76,6 +83,7 @@ class DPlayer {
 
         this.controller = new Controller(this);
 
+        // 弹幕相关
         if (this.options.danmaku) {
             this.danmaku = new Danmaku({
                 container: this.template.danmaku,
@@ -113,6 +121,7 @@ class DPlayer {
             this.comment = new Comment(this);
         }
 
+        // 底部设置的dom
         this.setting = new Setting(this);
 
         document.addEventListener('click', () => {
@@ -560,6 +569,7 @@ class DPlayer {
         }
     }
 
+    // 这个是调整弹幕的resize，在全屏和小屏切换时用到
     resize () {
         if (this.danmaku) {
             this.danmaku.resize();

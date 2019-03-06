@@ -20,6 +20,7 @@ export default (options) => {
         contextmenu: [],
         mutex: true
     };
+    // 对options中没有的配置，进行补充default配置
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {
             options[defaultKey] = defaultOption[defaultKey];

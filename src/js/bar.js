@@ -15,6 +15,7 @@ class Bar {
      * @param {String} direction - Point out the direction of this bar, Should be height or width
      */
     set (type, percentage, direction) {
+        // 保证是0-1之间
         percentage = Math.max(percentage, 0);
         percentage = Math.min(percentage, 1);
         this.elements[type].style[direction] = percentage * 100 + '%';

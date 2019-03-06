@@ -32,6 +32,7 @@ class Danmaku {
         endpoints.push(apiurl);
         this.events && this.events.trigger('danmaku_load_start', endpoints);
 
+        // 弹幕挂载相关逻辑
         this._readAllEndpoints(endpoints, (results) => {
             this.dan = [].concat.apply([], results).sort((a, b) => a.time - b.time);
             window.requestAnimationFrame(() => {
@@ -53,6 +54,7 @@ class Danmaku {
 
     /**
     * Asynchronously read danmaku from all API endpoints
+    * 
     */
     _readAllEndpoints (endpoints, callback) {
         const results = [];
@@ -118,6 +120,7 @@ class Danmaku {
         if (this.dan.length && !this.paused && this.showing) {
             let item = this.dan[this.danIndex];
             const dan = [];
+            // danIndex对应的内容draw
             while (item && this.options.time() > parseFloat(item.time)) {
                 dan.push(item);
                 item = this.dan[++this.danIndex];
@@ -203,6 +206,7 @@ class Danmaku {
                 dan = [dan];
             }
 
+            // 减少重排
             const docFragment = document.createDocumentFragment();
 
             for (let i = 0; i < dan.length; i++) {

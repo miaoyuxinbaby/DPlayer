@@ -11,6 +11,7 @@ class Template {
     }
 
     init () {
+        // render dom 模板引擎基本都是可执行的函数，传入数据，返回html
         this.container.innerHTML = tplPlayer({
             options: this.options,
             index: this.index,
@@ -26,6 +27,7 @@ class Template {
             }
         });
 
+        // 获取一系列元素的dom句柄
         this.volumeBar = this.container.querySelector('.dplayer-volume-bar-inner');
         this.volumeBarWrap = this.container.querySelector('.dplayer-volume-bar');
         this.volumeBarWrapWrap = this.container.querySelector('.dplayer-volume-bar-wrap');
